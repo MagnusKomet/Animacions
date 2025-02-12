@@ -18,17 +18,21 @@ class BallActivity : AppCompatActivity() {
 
         val ballImageView = binding.ballImage
 
+        // Al fer click s'obra el MainActivity amb una transició d'opacitat.
         ballImageView.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
+        // Animacions de la bola
         ballImageView.post {
+            // Agafem el tamany de la pantalla i de la bola
             val screenWidth = ballImageView.rootView.width.toFloat()
             val screenHeight = ballImageView.rootView.height.toFloat()
             val imageWidth = ballImageView.width.toFloat()
             val imageHeight = ballImageView.height.toFloat()
 
+            // Preparem totes les animacions i el seu ordre
             val animatorSet = AnimatorSet()
             animatorSet.playSequentially(
 
@@ -43,6 +47,7 @@ class BallActivity : AppCompatActivity() {
                 ObjectAnimator.ofFloat(ballImageView, "translationY", (screenHeight - imageHeight) / 2)
             )
 
+            //Seleccionem la duració i començem l'animació
             animatorSet.duration = 1000
             animatorSet.start()
         }
